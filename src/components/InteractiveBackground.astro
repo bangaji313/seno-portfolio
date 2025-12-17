@@ -1,0 +1,180 @@
+<div id="canvas-container" class="fixed inset-0 -z-10 pointer-events-none">
+    <canvas id="neural-canvas"></canvas>
+</div>
+
+<script>
+    const canvas = document.getElementById('neural-canvas') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d');
+    
+    let particlesArray: Particle[] = [];
+    
+    // --- KONFIGURASI WARNA (Bisa diedit sesuka hati) ---
+    const colors = {
+        dark: {
+            particle: 'rgba(100, 181, 246, 0.8)', // Biru muda terang
+            line: 'rgba(59, 130, 246,',           // Warna dasar garis (Blue-500)
+            bg: '#0f172a'                         // Slate-900 (Gelap)
+        },
+        light: {
+            particle: 'rgba(99, 102, 241, 0.8)',  // Indigo
+            line: 'rgba(99, 102, 241,',           // Indigo
+            bg: '#ffffff'                         // Putih
+        }
+    };
+
+    let isDarkMode = document.documentElement.classList.contains('dark');
+
+    // Sesuaikan ukuran canvas dengan layar
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Handle Resize (Kalau layar dibesarkecilkan)
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        init();
+    });
+
+    // Handle Mouse Interaction
+    const mouse = {
+        x: null as number | null,
+        y: null as number | null,
+        radius: 150
+    }
+
+    window.addEventListener('mousemove', (event) => {
+        mouse.x = event.x;
+        mouse.y = event.y;
+    });
+
+    window.addEventListener('mouseout', () => {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    // --- KELAS PARTIKEL (TITIK-TITIK) ---
+    class Particle {
+        x: number;
+        y: number;
+        directionX: number;
+        directionY: number;
+        size: number;
+        color: string;
+
+        constructor() {
+            this.x = Math.random() * (canvas.width - this.size * 2) + this.size * 2;
+            this.y = Math.random() * (canvas.height - this.size * 2) + this.size * 2;
+            this.directionX = (Math.random() * 0.4) - 0.2; // Kecepatan Gerak X
+            this.directionY = (Math.random() * 0.4) - 0.2; // Kecepatan Gerak Y
+            this.size = Math.random() * 2 + 1; // Ukuran Titik
+            this.color = isDarkMode ? colors.dark.particle : colors.light.particle;
+        }
+
+        // Fungsi Update Tiap Frame
+        update() {
+            // Cek batas layar (biar mantul)
+            if (this.x > canvas.width || this.x < 0) {
+                this.directionX = -this.directionX;
+            }
+            if (this.y > canvas.height || this.y < 0) {
+                this.directionY = -this.directionY;
+            }
+
+            // Interaksi Mouse (Efek Magnet/Menghindar)
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let distance = Math.sqrt(dx*dx + dy*dy);
+
+            if (distance < mouse.radius + this.size) {
+                if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
+                    this.x += 2;
+                }
+                if (mouse.x > this.x && this.x > this.size * 10) {
+                    this.x -= 2;
+                }
+                if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
+                    this.y += 2;
+                }
+                if (mouse.y > this.y && this.y > this.size * 10) {
+                    this.y -= 2;
+                }
+            }
+
+            // Gerakkan partikel
+            this.x += this.directionX;
+            this.y += this.directionY;
+
+            this.draw();
+        }
+
+        // Gambar Titik
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+            ctx.fillStyle = isDarkMode ? colors.dark.particle : colors.light.particle;
+            ctx.fill();
+        }
+    }
+
+    // --- FUNGSI INISIALISASI ---
+    function init() {
+        particlesArray = [];
+        // Hitung jumlah partikel berdasarkan luas layar (biar tidak lag di HP)
+        let numberOfParticles = (canvas.height * canvas.width) / 15000; 
+        
+        for (let i = 0; i < numberOfParticles; i++) {
+            particlesArray.push(new Particle());
+        }
+    }
+
+    // --- FUNGSI GAMBAR GARIS PENGHUBUNG ---
+    function connect() {
+        let opacityValue = 1;
+        for (let a = 0; a < particlesArray.length; a++) {
+            for (let b = a; b < particlesArray.length; b++) {
+                let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                             + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                
+                // Jika jarak dekat, gambar garis
+                if (distance < (canvas.width/7) * (canvas.height/7)) {
+                    opacityValue = 1 - (distance/20000);
+                    let strokeColor = isDarkMode ? colors.dark.line : colors.light.line;
+                    
+                    ctx.strokeStyle = strokeColor + opacityValue + ')';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                    ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    // --- ANIMATION LOOP ---
+    function animate() {
+        requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+        }
+        connect();
+    }
+
+    // --- DETEKSI PERUBAHAN TEMA (DARK/LIGHT) ---
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class') {
+                isDarkMode = document.documentElement.classList.contains('dark');
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, { attributes: true });
+
+    // JALANKAN
+    init();
+    animate();
+
+</script>

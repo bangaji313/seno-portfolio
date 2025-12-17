@@ -1,5 +1,10 @@
 ---
 import "../styles/global.css";
+// IMPORT KOMPONEN BACKGROUND (Tetap ada)
+// Pastikan file InteractiveBackground.astro sudah ada di folder components
+// Jika scriptnya inline seperti revisi terakhir, baris import ini boleh dihapus
+// Tapi kalau Mas Seno pakai inline script di bawah, import ini tidak masalah dibiarkan atau dihapus.
+// Demi keamanan sesuai revisi terakhir (inline script), saya hapus import komponennya biar tidak error.
 
 const { title } = Astro.props;
 ---
@@ -10,6 +15,9 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/png" href="/images/profile/logo-seno.png" />
 		
         <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicon/devicon@latest/devicon.min.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
           
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
@@ -23,57 +31,266 @@ const { title } = Astro.props;
             }
         </script>
 	</head>
-	<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 antialiased flex flex-col min-h-screen">
+    
+	<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 antialiased flex flex-col min-h-screen relative font-sans">
+        
+        <canvas id="neural-canvas" class="fixed inset-0 -z-10 pointer-events-none w-full h-full"></canvas>
+
         <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
             <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-                <a href="/" class="flex items-center gap-2 group">
-                    <img 
-                        src="/images/profile/logo-seno.png" 
-                        alt="Seno Logo" 
-                        class="w-8 h-8 md:w-10 md:h-10 object-contain transition-transform duration-300 group-hover:scale-110"
-                    />
-                    <span class="text-xl md:text-2xl font-bold font-mono tracking-tighter text-gray-900 dark:text-white">
-                        Seno.
-                    </span>
-                </a>
                 
-                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <span class="dark:hidden">🌞</span>
-                    <span class="hidden dark:inline">🌙</span>
-                </button>
+                <a href="#" class="flex items-center gap-2 group">
+                    <img src="/images/profile/logo-seno.png" alt="Seno Logo" class="w-8 h-8 md:w-10 md:h-10 object-contain transition-transform duration-300 group-hover:scale-110"/>
+                    <span class="text-xl md:text-2xl font-bold font-mono tracking-tighter text-gray-900 dark:text-white">Seno.</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center justify-center flex-1 mx-4">
+                    <ul class="flex items-center gap-6 font-medium text-sm text-gray-600 dark:text-gray-300">
+                        <li>
+                            <a href="#" class="flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                </svg>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#projects" class="flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                                </svg>
+                                <span>Projects</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#activities" class="flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
+                                </svg>
+                                <span>Experience</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                                </svg>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mobile Navigation Button & Theme Toggle -->
+                <div class="flex items-center gap-2">
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 hover:rotate-12">
+                        <span class="dark:hidden">🌞</span>
+                        <span class="hidden dark:inline">🌙</span>
+                    </button>
+
+                    <!-- Hamburger Menu (Mobile) -->
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white/95 dark:bg-gray-800/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 animate-in slide-in-from-top-2 duration-300">
+                <ul class="flex flex-col gap-0 font-medium text-sm text-gray-600 dark:text-gray-300 divide-y divide-gray-200 dark:divide-gray-700">
+                    <li>
+                        <a href="#" class="mobile-nav-link flex items-center gap-3 px-4 py-3 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                            </svg>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#projects" class="mobile-nav-link flex items-center gap-3 px-4 py-3 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+                            </svg>
+                            <span>Projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#activities" class="mobile-nav-link flex items-center gap-3 px-4 py-3 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
+                            </svg>
+                            <span>Experience</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="mobile-nav-link flex items-center gap-3 px-4 py-3 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                            </svg>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </nav>
 
-        <main class="flex-grow pt-24 pb-12">
+        <main class="flex-grow pt-24 pb-12 relative z-10">
             <slot /> 
         </main>
 
-        <footer class="py-12 text-center text-sm border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50 mt-auto">
+        <footer class="py-12 text-center text-sm border-t border-gray-200 dark:border-gray-800 bg-gray-50/80 dark:bg-gray-900/80 mt-auto relative z-10">
             <div class="flex flex-col items-center justify-center gap-4">
-                <img 
-                    src="/images/profile/logo-seno.png" 
-                    alt="Seno Logo" 
-                    class="w-12 h-12 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition duration-500"
-                />
-                <p class="text-gray-500 dark:text-gray-400">
-                    &copy; 2025 Maulana Seno Aji Y. <br class="md:hidden" /> Built with Astro & Tailwind.
-                </p>
+                <img src="/images/profile/logo-seno.png" alt="Seno Logo" class="w-12 h-12 opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition duration-500"/>
+                <p class="text-gray-500 dark:text-gray-400">&copy; 2025 Maulana Seno Aji Y. <br class="md:hidden" /> Built with Astro & Tailwind.</p>
             </div>
         </footer>
 
         <script>
-            const themeToggle = document.getElementById('theme-toggle');
-            
-            themeToggle.addEventListener('click', () => {
-                const html = document.documentElement;
-                if (html.classList.contains('dark')) {
-                    html.classList.remove('dark');
-                    localStorage.theme = 'light';
-                } else {
-                    html.classList.add('dark');
-                    localStorage.theme = 'dark';
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                // Close menu when a link is clicked
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            }
+
+            (function() {
+                const canvas = document.getElementById('neural-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                
+                let isDarkMode = document.documentElement.classList.contains('dark');
+                const colors = {
+                    dark: { particle: 'rgba(100, 181, 246, 0.8)', line: 'rgba(59, 130, 246,' },
+                    light: { particle: 'rgba(99, 102, 241, 0.8)', line: 'rgba(99, 102, 241,' }
+                };
+
+                let particlesArray = [];
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+
+                window.addEventListener('resize', () => {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    init();
+                });
+
+                const mouse = { x: null, y: null, radius: 150 };
+                window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+                window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = Math.random() * canvas.height;
+                        this.directionX = (Math.random() * 0.4) - 0.2;
+                        this.directionY = (Math.random() * 0.4) - 0.2;
+                        this.size = Math.random() * 2 + 1;
+                    }
+                    update() {
+                        if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                        if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                        
+                        let dx = mouse.x - this.x;
+                        let dy = mouse.y - this.y;
+                        let distance = Math.sqrt(dx*dx + dy*dy);
+                        if (distance < mouse.radius + this.size) {
+                            if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 2;
+                            if (mouse.x > this.x && this.x > this.size * 10) this.x -= 2;
+                            if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 2;
+                            if (mouse.y > this.y && this.y > this.size * 10) this.y -= 2;
+                        }
+                        this.x += this.directionX;
+                        this.y += this.directionY;
+                        this.draw();
+                    }
+                    draw() {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                        ctx.fillStyle = isDarkMode ? colors.dark.particle : colors.light.particle;
+                        ctx.fill();
+                    }
                 }
-            });
+
+                function init() {
+                    particlesArray = [];
+                    let numberOfParticles = (canvas.height * canvas.width) / 15000;
+                    for (let i = 0; i < numberOfParticles; i++) particlesArray.push(new Particle());
+                }
+
+                function connect() {
+                    let opacityValue = 1;
+                    for (let a = 0; a < particlesArray.length; a++) {
+                        for (let b = a; b < particlesArray.length; b++) {
+                            let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                                        + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                            if (distance < (canvas.width/7) * (canvas.height/7)) {
+                                opacityValue = 1 - (distance/20000);
+                                let strokeColor = isDarkMode ? colors.dark.line : colors.light.line;
+                                ctx.strokeStyle = strokeColor + opacityValue + ')';
+                                ctx.lineWidth = 1;
+                                ctx.beginPath();
+                                ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                                ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                }
+
+                function animate() {
+                    requestAnimationFrame(animate);
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
+                    connect();
+                }
+
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.attributeName === 'class') {
+                            isDarkMode = document.documentElement.classList.contains('dark');
+                        }
+                    });
+                });
+                observer.observe(document.documentElement, { attributes: true });
+
+                const themeToggle = document.getElementById('theme-toggle');
+                if(themeToggle) {
+                    themeToggle.addEventListener('click', () => {
+                        const html = document.documentElement;
+                        if (html.classList.contains('dark')) {
+                            html.classList.remove('dark');
+                            localStorage.theme = 'light';
+                        } else {
+                            html.classList.add('dark');
+                            localStorage.theme = 'dark';
+                        }
+                    });
+                }
+
+                init();
+                animate();
+            })();
         </script>
 	</body>
 </html>

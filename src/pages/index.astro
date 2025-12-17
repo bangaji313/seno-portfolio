@@ -3,58 +3,116 @@ import MainLayout from '../layouts/MainLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import TimelineItem from '../components/TimelineItem.astro';
 
-// --- DATA: PROJECTS ---
+// --- DATA: REAL PROJECTS (UPDATED) ---
 const projects = [
     {
-        title: 'Predictive Maintenance AI',
-        description: 'Machine Learning model to predict machinery failure 7 days in advance using sensor data (vibration, temperature).',
-        tags: ['Python', 'XGBoost', 'IoT Data'],
+        title: 'CNN Flower Classification',
+        description: 'Deep Learning model achieving high accuracy in classifying 5 different flower species using Convolutional Neural Networks.',
+        // Deskripsi Lengkap untuk Pop-up
+        detailedDescription: 'Developed a high-performance Convolutional Neural Network (CNN) capable of classifying 5 distinct flower species (Rose, Tulip, Sunflower, Daisy, Dandelion). The model utilizes advanced data augmentation techniques to prevent overfitting and ensure robustness. Built using Python and TensorFlow/Keras, this project demonstrates end-to-end Computer Vision pipeline implementation from data preprocessing to model evaluation.',
+        tags: ['Python', 'TensorFlow', 'Keras', 'Computer Vision'],
         link: '#',
-        github: 'https://github.com/bangaji313'
+        github: 'https://github.com/bangaji313/CNN-5-Flower-Types-Classification.git',
+        demoImage: '', // Kosongkan jika tidak ada
+        demoVideo: ''  // Kosongkan jika tidak ada
     },
     {
-        title: 'Customer Churn Analysis',
-        description: 'End-to-end data analysis pipeline to identify at-risk customers and visualize retention strategies using Tableau.',
-        tags: ['SQL', 'Tableau', 'Pandas'],
+        title: 'ESP32 IoT Agricultural Robot',
+        description: 'Smart farming robot prototype powered by ESP32 for automated soil monitoring and irrigation control.',
+        detailedDescription: 'Engineered an IoT-based agricultural robot designed to modernize farming practices. The robot navigates fields to monitor soil moisture, temperature, and humidity in real-time. Powered by an ESP32 microcontroller, it features an automated irrigation system that triggers based on sensor thresholds. The system bridges hardware and software through a custom dashboard for remote monitoring.',
+        tags: ['C++', 'IoT', 'ESP32', 'Robotics', 'Sensors'],
         link: '#',
-        github: 'https://github.com/bangaji313'
+        github: 'https://github.com/bangaji313/ESP32-IoT-Agricultural-Robot.git',
+        // Placeholder Media (Nanti Mas Seno ganti path-nya dengan file asli di folder public/images/projects/)
+        demoImage: '/images/projects/FisikRobot.jpg', 
+        demoVideo: 'https://drive.google.com/file/d/1Osnr1ss_NfM5m6viLpX-DdSs46xqzNcz/preview' // Ganti dengan link embed youtube jika ada, atau kosongkan
     },
     {
-        title: 'Smart City Traffic Vision',
-        description: 'Computer Vision system detecting traffic congestion levels in real-time from CCTV footage.',
-        tags: ['YOLOv8', 'OpenCV', 'PyTorch'],
+        title: 'Webcam Emotion & Fatigue Monitor',
+        description: 'Real-time safety system detecting driver drowsiness and emotions using facial landmark analysis.',
+        detailedDescription: 'A real-time computer vision application designed for safety monitoring. By utilizing facial landmark detection (Dlib/MediaPipe), the system calculates the Eye Aspect Ratio (EAR) to detect drowsiness and alerts the user. Simultaneously, it classifies facial expressions into emotions (Happy, Sad, Neutral) using a trained ML classifier, providing comprehensive user state analysis.',
+        tags: ['Python', 'OpenCV', 'Dlib', 'Face Recognition'],
         link: '#',
-        github: 'https://github.com/bangaji313'
+        github: 'https://github.com/bangaji313/Webcam-Emotion-Fatigue-Monitor.git',
+        demoImage: '',
+        demoVideo: ''
     }
 ];
 
-// --- DATA: ACTIVITIES ---
+// --- DATA: ACTIVITIES (EXPANDED DESCRIPTIONS) ---
 const activities = [
+    // --- SEMESTER 7 (Current) ---
+    {
+        year: 'Sep 2025 - Jan 2026',
+        title: 'Lab Coordinator - Multimedia Techniques',
+        company: 'Institut Teknologi Nasional Bandung',
+        description: 'Led laboratory operations as a Coordinator, overseeing the daily workflow of 10+ assistants and managing practical schedules for over 100 students. Developed comprehensive grading systems and standardized assessment forms to ensure objective evaluation. Spearheaded the curriculum for interactive multimedia, teaching advanced techniques in Adobe Animate and Premiere Pro for 2D content. Guided students in building immersive 3D environments using Blender, Unity, and Unreal Engine, resulting in high-quality final semester projects.',
+        images: [] 
+    },
+    {
+        year: 'Sep 2025 - Jan 2026',
+        title: 'Lab Assistant - IoT Programming',
+        company: 'Institut Teknologi Nasional Bandung',
+        description: 'Guided students in end-to-end IoT development, bridging the gap between hardware electronics and software applications. Instructed on circuit design and sensor integration using ESP32 microcontrollers. Focused on robust API implementation connecting hardware to backend servers and mobile/web frontends using MQTT and HTTP protocols. Assisted in debugging complex hardware-software communication issues to ensure reliable data transmission.',
+        images: [] 
+    },
+    {
+        year: 'Sep 2025 - Jan 2026',
+        title: 'Lab Assistant - Basic Programming (2nd Term)',
+        company: 'Institut Teknologi Nasional Bandung',
+        description: 'Selected for a second consecutive term due to exemplary teaching performance and mastery of material. Specialized in mentoring freshman students on Python syntax, control structures, and algorithmic thinking. Integrated embedded systems logic using Raspberry Pi, teaching students how to control GPIO pins and interface with external modules. Facilitated problem-solving sessions to help students transition from block-based logic to actual coding.',
+        images: [] 
+    },
+
+    // --- PENGALAMAN SEBELUMNYA ---
+    {
+        year: 'Feb 2025 - Jun 2025',
+        title: 'Lab Assistant - Computer Networks',
+        company: 'Institut Teknologi Nasional Bandung',
+        description: 'Designed and conducted practical sessions for Linux server administration, covering DNS, DHCP, and Web Server configurations on Ubuntu/Debian. Orchestrated complex network simulations using Huawei eNSP to demonstrate real-world routing scenarios. Authored 4 comprehensive laboratory modules covering OSPF Routing, ACL Security, and IPv4 Addressing, which were officially adopted as the standard teaching curriculum. Monitored student network topologies to ensure optimal configuration and security best practices.',
+        images: [] 
+    },
+    {
+        year: 'Feb 2025 - Jun 2025',
+        title: 'Lab Assistant - OOP',
+        company: 'Institut Teknologi Nasional Bandung',
+        description: 'Taught fundamental Object-Oriented Programming concepts including Inheritance, Polymorphism, Encapsulation, and Abstraction using Java. Mentored a class of 40 students through weekly coding challenges and live debugging sessions. Authored a "Java Best Practices" supplementary guide that standardized coding conventions and reduced common syntax errors by 30%. Conducted code reviews to ensure student projects adhered to SOLID principles and modular design.',
+        images: [] 
+    },
+    {
+        year: 'Feb 2024 - Jun 2025',
+        title: 'Lab Assistant - Digital Image Processing',
+        company: 'Institut Teknologi Nasional Bandung',
+        description: 'Mentored 42 students in the practical application of Computer Vision theories using Python, OpenCV, and Scikit-image libraries. Facilitated hands-on workshops on image enhancement, morphological operations, and feature extraction. Achieved a 95% student project success rate in implementing complex algorithms like Canny Edge Detection and Watershed Segmentation. Provided technical consultation for final projects, helping students optimize image processing pipelines for real-time performance.',
+        images: [] 
+    },
+
+    // --- PRESTASI & KEGIATAN LAIN (Tetap Sama) ---
     {
         year: 'Oct 2025',
         title: 'Laboratory Ecosystem Speaker',
         company: 'PKKM 2025 Event',
-        description: 'Selected as a keynote speaker to introduce the ITENAS Informatics Laboratory ecosystem. Presented the "Six Pillars of Innovation" (I-WILL, ICT, WIT, SIRIUS, CITE, and SSIP Labs) to new students and stakeholders.',
+        description: 'Selected as a keynote speaker to introduce the ITENAS Informatics Laboratory ecosystem (I-WILL, ICT, WIT, SIRIUS, CITE, SSIP) to new students and stakeholders.',
         images: ['/images/activities/speaker-lab-1.jpg', '/images/activities/speaker-lab-2.jpg']
     },
     {
         year: 'Aug 2025',
-        title: '2nd Place - National Scientific Essay',
-        company: 'LINTAS ORMAWA 2025',
-        description: 'Authored an award-winning essay titled "Development of Blind-Friendly Navigation Assistant". Proposed a browser extension combining Speech Recognition and LLMs.',
-        images: ['/images/activities/essay-sinec.jpg']
+        title: '3rd Place & Most Implementative Idea', // Update judul biar lebih wow
+        company: 'SINEC 2025',
+        description: 'Authored an award-winning essay titled "Development of Blind-Friendly Navigation Assistant". Proposed a browser extension combining Speech Recognition and LLMs to assist visually impaired users. Recognized as the "Most Implementative Idea" for its practical approach and high potential for real-world application.',
+        images: ['/images/activities/essay-sinec.jpg', '/images/activities/essay-sinec-2.jpg']
     },
     {
         year: 'Aug 2025',
         title: 'Top 5 Best Capstone Project',
-        company: 'Coding Camp 2025 (DBS x Dicoding)',
-        description: 'Selected from 5000+ applicants. Served as Project Manager for "SmartSaku". Led a team of 5, managed end-to-end development using Agile/Trello.',
+        company: 'Coding Camp 2025 (DBS Foundation x Dicoding)',
+        description: 'Selected from 5000+ applicants. Served as Project Manager for "SmartSaku", leading a team of 5 in end-to-end development using Agile methodology.',
         images: ['/images/activities/Top-5-Coding-Camp-1.jpg', '/images/activities/Top-5-Coding-Camp-2.jpg']
     },
     {
         year: '2025',
-        title: 'Lead Developer - Community Partnership',
-        company: 'Funded by Kemendiktisaintek',
+        title: 'Game Developer - Community Partnership (Funded by Kemendiktisaintek)',
+        company: 'ITENAS Bandung x SDIT Daarul Jihad',
         description: 'Led the development of a Solar System educational app using Mixed Reality (Meta Quest 3). Engineered a real-time multiplayer feature for collaborative learning.',
         images: ['/images/activities/PKM-1.png', '/images/activities/PKM-2.jpeg']
     },
@@ -88,8 +146,7 @@ const activities = [
     }
 ];
 
-// --- DATA: SKILLS (BARU - PAKAI LINK GAMBAR LANGSUNG) ---
-// Kita pakai link CDN SimpleIcons yang pasti muncul gambarnya
+// --- SKILLS ---
 const skills = [
     { name: 'Python', icon: 'https://cdn.simpleicons.org/python' },
     { name: 'TensorFlow', icon: 'https://cdn.simpleicons.org/tensorflow' },
@@ -128,11 +185,10 @@ const skills = [
                         I build intelligent systems that turn complex data into actionable insights.
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-8">
                         <a href="#projects" class="px-8 py-4 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30">
                             Explore Projects
                         </a>
-                        
                         <a href="/images/cv-seno.pdf" download class="px-8 py-4 rounded-full border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-white font-bold hover:border-blue-600 hover:text-blue-600 dark:hover:border-blue-400 dark:hover:text-blue-400 transition flex items-center justify-center gap-2 group">
                             <span>Download CV</span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 group-hover:translate-y-1 transition">
@@ -140,16 +196,32 @@ const skills = [
                             </svg>
                         </a>
                     </div>
+
+                    <div class="flex items-center justify-center md:justify-start gap-6 text-gray-500 dark:text-gray-400">
+                        <a href="https://www.linkedin.com/in/maulanaseno/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition hover:scale-110">
+                            <span class="sr-only">LinkedIn</span>
+                            <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <a href="https://github.com/bangaji313" target="_blank" class="hover:text-gray-900 dark:hover:text-white transition hover:scale-110">
+                            <span class="sr-only">GitHub</span>
+                            <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                        <a href="mailto:senoaji115@gmail.com" class="hover:text-red-500 transition hover:scale-110">
+                            <span class="sr-only">Email</span>
+                            <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-11.174l4.623 5.462zm2.141-1.158l2.92 3.725 2.917-3.725 6.635 7.429h-19.109l6.637-7.429zm3.236-2.885l-5.454-4.386h10.907l-5.453 4.386zm3.877 1.727l4.623-5.462v11.175l-4.623-5.713z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/senoaji19_/" target="_blank" class="hover:text-pink-600 transition hover:scale-110">
+                            <span class="sr-only">Instagram</span>
+                            <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+
                 </div>
 
                 <div class="flex-1 relative flex justify-center md:justify-end">
                     <div class="glow-effect top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
                     <div class="relative w-64 h-64 md:w-96 md:h-96">
-                        <img 
-                            src="/images/profile/seno-profile.png" 
-                            alt="Maulana Seno Aji" 
-                            class="w-full h-full object-cover rounded-3xl rotate-3 hover:rotate-0 transition duration-500 border-4 border-white dark:border-gray-800 shadow-2xl"
-                        />
+                        <img src="/images/profile/seno-profile.png" alt="Maulana Seno Aji" class="w-full h-full object-cover rounded-3xl rotate-3 hover:rotate-0 transition duration-500 border-4 border-white dark:border-gray-800 shadow-2xl"/>
                     </div>
                 </div>
             </div>
@@ -158,27 +230,17 @@ const skills = [
 
     <section class="py-10 border-b border-gray-200 dark:border-gray-800">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-8">
-                Technical Proficiency & Tools
-            </p>
-            
+            <p class="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-8">Technical Proficiency & Tools</p>
             <div class="flex flex-wrap justify-center gap-8 md:gap-12">
                 {skills.map((skill) => (
                     <div class="group flex flex-col items-center gap-2">
                         <div class="w-12 h-12 md:w-14 md:h-14 p-2 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-sm">
-                            <img 
-                                src={skill.icon} 
-                                alt={skill.name}
-                                class="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                            />
+                            <img src={skill.icon} alt={skill.name} class="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"/>
                         </div>
-                        <span class="text-xs font-medium text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                            {skill.name}
-                        </span>
+                        <span class="text-xs font-medium text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{skill.name}</span>
                     </div>
                 ))}
             </div>
-
             <div class="mt-10 flex flex-wrap justify-center gap-3">
                 <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-sm">Project Management</span>
                 <span class="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full text-sm">Agile / Scrum</span>
@@ -193,113 +255,153 @@ const skills = [
             <div class="flex flex-col md:flex-row justify-between items-end mb-12">
                 <div>
                     <h2 class="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Selected Projects</h2>
-                    <p class="text-gray-600 dark:text-gray-400 max-w-lg">
-                        Focusing on Data Science, Computer Vision, and Predictive Modeling.
-                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 max-w-lg">Focusing on Data Science, Computer Vision, and Predictive Modeling.</p>
                 </div>
                 <a href="https://github.com/bangaji313" target="_blank" class="hidden md:inline-flex items-center gap-2 text-blue-600 font-semibold hover:underline">
                     View GitHub <span class="text-xl">&rarr;</span>
                 </a>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {projects.map((project) => (
                     <ProjectCard 
                         title={project.title}
                         description={project.description}
+                        detailedDescription={project.detailedDescription}
                         tags={project.tags}
                         link={project.link}
                         github={project.github}
+                        demoImage={project.demoImage}
+                        demoVideo={project.demoVideo}
                     />
                 ))}
             </div>
         </div>
     </section>
 
-    <section id="activities" class="py-20 overflow-hidden">
+    <section id="activities" class="py-20">
         <div class="container mx-auto px-4">
-            <div class="mb-10 text-center md:text-left flex justify-between items-end">
-                <div>
-                    <h2 class="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-                        Journey & Achievements
-                    </h2>
-                    <p class="text-gray-500 dark:text-gray-400">
-                        Swipe or use arrows to explore my milestones.
-                    </p>
-                </div>
+            <div class="mb-12 text-center">
+                <h2 class="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Experience & Achievements</h2>
+                <p class="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+                    My professional journey, laboratory teaching experiences, and key milestones in competitions.
+                </p>
             </div>
-            
-            <div class="relative group">
-                <button id="scroll-left" class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-3 rounded-full shadow-lg text-gray-800 dark:text-white hover:bg-blue-50 dark:hover:bg-gray-700 transition-all hidden md:flex items-center justify-center border border-gray-200 dark:border-gray-700 -ml-5 lg:-ml-8 opacity-0 group-hover:opacity-100 focus:opacity-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
-                </button>
-
-                <div id="activities-container" class="flex flex-nowrap gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar scroll-smooth">
-                    {activities.map((activity) => (
-                        <TimelineItem 
-                            year={activity.year}
-                            title={activity.title}
-                            company={activity.company}
-                            description={activity.description}
-                            images={activity.images}
-                        />
-                    ))}
-                    <div class="w-4 md:w-10 flex-none"></div>
-                </div>
-
-                <button id="scroll-right" class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-3 rounded-full shadow-lg text-gray-800 dark:text-white hover:bg-blue-50 dark:hover:bg-gray-700 transition-all hidden md:flex items-center justify-center border border-gray-200 dark:border-gray-700 -mr-5 lg:-mr-8 opacity-0 group-hover:opacity-100 focus:opacity-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
-                </button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-fr">
+                {activities.map((activity) => (
+                    <TimelineItem 
+                        year={activity.year}
+                        title={activity.title}
+                        company={activity.company}
+                        description={activity.description}
+                        images={activity.images}
+                    />
+                ))}
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-900/50">
-        <div class="container mx-auto px-4 max-w-4xl">
-             <h2 class="text-4xl font-bold mb-12 text-center text-gray-900 dark:text-white">Let's Connect</h2>
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-4 max-w-5xl">
+             <h2 class="text-4xl font-bold mb-16 text-center text-gray-900 dark:text-white">Let's Connect</h2>
+             
              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <a href="mailto:senoaji115@gmail.com" class="md:col-span-2 bg-blue-600 rounded-2xl p-8 flex flex-col justify-between text-white hover:bg-blue-700 transition shadow-lg group min-h-[180px]">
-                    <div class="flex justify-between items-start">
-                        <span class="text-3xl bg-white/20 p-3 rounded-xl">✉️</span>
-                        <span class="text-2xl group-hover:rotate-45 transition duration-300">↗</span>
+                
+                <a href="mailto:senoaji115@gmail.com" class="md:col-span-2 relative group overflow-hidden bg-blue-600 rounded-3xl p-8 flex flex-col justify-between text-white hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 min-h-[220px]">
+                    <div class="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-40 group-hover:scale-125 transition-transform duration-500">
+                        <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
                     </div>
-                    <div>
-                        <p class="text-blue-100 font-medium mb-1">Collaborate or just say hi</p>
-                        <h3 class="text-2xl font-bold break-all">senoaji115@gmail.com</h3>
+                    <div class="z-10">
+                        <span class="inline-block p-3 rounded-xl bg-white/20 mb-4 backdrop-blur-sm">
+                            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        </span>
+                        <h3 class="text-2xl font-bold mb-1">Collaborate or just say hi</h3>
+                        <p class="text-blue-100 font-medium opacity-90">senoaji115@gmail.com</p>
                     </div>
-                </a>
-                <a href="https://www.linkedin.com/in/maulanaseno/" target="_blank" class="md:row-span-2 bg-[#0077b5] rounded-2xl p-8 flex flex-col justify-between text-white hover:brightness-110 transition shadow-lg min-h-[180px]">
-                    <div class="flex justify-between items-start">
-                         <svg class="w-10 h-10 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                         <span class="text-2xl group-hover:translate-x-1 transition">↗</span>
-                    </div>
-                    <div>
-                        <p class="text-blue-100 font-medium">Professional Profile</p>
-                        <h3 class="text-2xl font-bold">LinkedIn</h3>
+                    <div class="absolute bottom-8 right-8 z-10 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300">
+                        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                     </div>
                 </a>
-                <a href="https://github.com/bangaji313" target="_blank" class="bg-gray-900 dark:bg-gray-800 rounded-2xl p-8 flex flex-col justify-between text-white hover:bg-gray-700 transition shadow-lg min-h-[180px]">
-                    <div class="flex justify-between items-start">
-                        <svg class="w-10 h-10 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        <span class="text-2xl">↗</span>
+
+                <a href="https://www.linkedin.com/in/maulanaseno/" target="_blank" class="md:row-span-2 relative group overflow-hidden bg-[#0077b5] rounded-3xl p-8 flex flex-col justify-between text-white hover:shadow-2xl hover:shadow-blue-600/30 transition-all duration-300 min-h-[220px]">
+                    <div class="absolute -bottom-10 -right-10 opacity-10 group-hover:opacity-20 group-hover:rotate-12 transition-all duration-500">
+                        <svg class="w-48 h-48 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                     </div>
-                    <div>
-                        <p class="text-gray-400 font-medium">Code Repository</p>
-                        <h3 class="text-xl font-bold">GitHub</h3>
+                    <div class="flex justify-between items-start z-10">
+                        <span class="inline-block p-3 rounded-xl bg-white/20 backdrop-blur-sm">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </span>
+                        <svg class="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                     </div>
-                </a>
-                <a href="https://www.instagram.com/senoaji19_/" target="_blank" class="bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 rounded-2xl p-8 flex flex-col justify-between text-white hover:opacity-90 transition shadow-lg min-h-[180px]">
-                    <div class="flex justify-between items-start">
-                        <svg class="w-10 h-10 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    </div>
-                    <div>
-                        <p class="text-red-100 font-medium">Daily Updates</p>
-                        <h3 class="text-xl font-bold">Instagram</h3>
+                    <div class="z-10 mt-12">
+                        <h3 class="text-xl font-bold">Professional Profile</h3>
+                        <p class="text-blue-100 font-medium">Let's connect on LinkedIn</p>
                     </div>
                 </a>
+
+                <a href="https://github.com/bangaji313" target="_blank" class="relative group overflow-hidden bg-[#181717] dark:bg-[#24292e] rounded-3xl p-6 flex flex-col justify-between text-white hover:shadow-2xl hover:shadow-gray-900/30 transition-all duration-300 min-h-[180px]">
+                    <div class="absolute -right-6 -bottom-6 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-transform">
+                        <svg class="w-32 h-32 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </div>
+                    <div class="flex justify-between items-start z-10">
+                        <span class="inline-block p-2.5 rounded-xl bg-white/10 backdrop-blur-sm">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </span>
+                    </div>
+                    <div class="z-10 mt-4">
+                        <h3 class="text-lg font-bold">GitHub</h3>
+                        <p class="text-gray-400 text-sm">Check my repos</p>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/senoaji19_/" target="_blank" class="relative group overflow-hidden bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 rounded-3xl p-6 flex flex-col justify-between text-white hover:shadow-2xl hover:shadow-pink-500/30 transition-all duration-300 min-h-[180px]">
+                    <div class="absolute -right-6 -top-6 opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-transform">
+                        <svg class="w-32 h-32 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                    <div class="flex justify-between items-start z-10">
+                        <span class="inline-block p-2.5 rounded-xl bg-white/20 backdrop-blur-sm">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </span>
+                    </div>
+                    <div class="z-10 mt-4">
+                        <h3 class="text-lg font-bold">Instagram</h3>
+                        <p class="text-red-100 text-sm">Daily updates</p>
+                    </div>
+                </a>
+
              </div>
         </div>
     </section>
+
+    <div id="project-modal" class="fixed inset-0 z-[100] bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl relative">
+            
+            <button id="modal-close" class="absolute top-4 right-4 p-2 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-500 hover:text-red-500 transition z-50">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div class="p-8">
+                <h2 id="modal-title" class="text-3xl font-bold text-gray-900 dark:text-white mb-2"></h2>
+                
+                <div id="modal-tags" class="flex flex-wrap gap-2 mb-6"></div>
+
+                <div id="modal-media" class="mb-6 rounded-xl overflow-hidden hidden">
+                    </div>
+
+                <div class="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-300">
+                    <p id="modal-desc" class="text-lg leading-relaxed"></p>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800 flex justify-end">
+                    <a id="modal-github" href="#" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-bold hover:opacity-90 transition">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        View Repository
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
         <button id="lightbox-close" class="absolute top-4 right-4 text-white hover:text-gray-300 z-50 p-2">
@@ -311,31 +413,101 @@ const skills = [
     </div>
 
     <script>
-        const container = document.getElementById('activities-container');
-        const leftBtn = document.getElementById('scroll-left');
-        const rightBtn = document.getElementById('scroll-right');
+        // --- LOGIC MODAL PROJECT ---
+        const projectModal = document.getElementById('project-modal');
+        const modalCloseBtn = document.getElementById('modal-close');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalTags = document.getElementById('modal-tags');
+        const modalGithub = document.getElementById('modal-github');
+        const modalMedia = document.getElementById('modal-media');
+        
+        const projectTriggers = document.querySelectorAll('.project-card-trigger');
 
-        const getScrollAmount = () => {
-            const firstCard = container.querySelector('div');
-            return firstCard ? firstCard.offsetWidth + 24 : 500;
-        }
+        projectTriggers.forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.getAttribute('data-title');
+                const desc = card.getAttribute('data-description');
+                const github = card.getAttribute('data-github');
+                const tags = card.getAttribute('data-tags').split(',');
+                const image = card.getAttribute('data-image');
+                const video = card.getAttribute('data-video');
 
-        if (container && leftBtn && rightBtn) {
-            leftBtn.addEventListener('click', () => {
-                container.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+                // Isi Konten Modal
+                modalTitle.textContent = title;
+                modalDesc.textContent = desc;
+                modalGithub.href = github;
+                
+                // Render Tags
+                modalTags.innerHTML = tags.map(tag => 
+                    `<span class="px-3 py-1 text-xs font-bold text-blue-600 bg-blue-100 rounded-full dark:bg-blue-900/30 dark:text-blue-300">${tag}</span>`
+                ).join('');
+
+                // Render Media (Gambar/Video)
+                modalMedia.innerHTML = ''; // Reset dulu
+                modalMedia.classList.add('hidden');
+
+                // --- KODE BARU (TAMPILKAN SEMUA YANG ADA) ---
+                let mediaContent = '';
+
+                // 1. Cek Image
+                if (image) {
+                    mediaContent += `<img src="${image}" class="w-full h-auto object-cover rounded-xl mb-4 shadow-md" alt="Project Preview">`;
+                }
+
+                // 2. Cek Video
+                if (video) {
+                    mediaContent += `
+                        <div class="relative w-full pt-[56.25%] rounded-xl overflow-hidden shadow-md bg-black">
+                            <iframe 
+                                class="absolute top-0 left-0 w-full h-full"
+                                src="${video}" 
+                                frameborder="0" 
+                                allow="autoplay; encrypted-media" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    `;
+                }
+
+                // 3. Masukkan ke HTML
+                if (mediaContent) {
+                    modalMedia.innerHTML = mediaContent;
+                    modalMedia.classList.remove('hidden');
+                } else {
+                    modalMedia.innerHTML = '';
+                    modalMedia.classList.add('hidden');
+                }
+
+                // Tampilkan Modal
+                projectModal.classList.remove('hidden');
+                setTimeout(() => {
+                    projectModal.classList.remove('opacity-0');
+                }, 10);
             });
-            rightBtn.addEventListener('click', () => {
-                container.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-            });
-        }
+        });
 
+        // Close Modal Project
+        const closeProjectModal = () => {
+            projectModal.classList.add('opacity-0');
+            setTimeout(() => {
+                projectModal.classList.add('hidden');
+                // Hentikan video kalau ada (biar suara gak bocor pas ditutup)
+                modalMedia.innerHTML = ''; 
+            }, 300);
+        };
+
+        if(modalCloseBtn) modalCloseBtn.addEventListener('click', closeProjectModal);
+        
+        // --- LOGIC LIGHTBOX (GALLERY) ---
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
-        const closeBtn = document.getElementById('lightbox-close');
-        const triggers = document.querySelectorAll('.lightbox-trigger');
+        const lbCloseBtn = document.getElementById('lightbox-close');
+        const lbTriggers = document.querySelectorAll('.lightbox-trigger');
 
-        triggers.forEach(img => {
+        lbTriggers.forEach(img => {
             img.addEventListener('click', (e) => {
+                e.stopPropagation(); // Biar gak bentrok sama klik kartu project
                 const src = e.target.getAttribute('src');
                 lightboxImg.setAttribute('src', src);
                 lightbox.classList.remove('hidden');
@@ -357,13 +529,18 @@ const skills = [
             }, 300);
         };
 
-        if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-        if (lightbox) lightbox.addEventListener('click', (e) => {
+        if (lbCloseBtn) lbCloseBtn.addEventListener('click', closeLightbox);
+        
+        // Global Close (Klik di luar / ESC)
+        window.addEventListener('click', (e) => {
+            if (e.target === projectModal) closeProjectModal();
             if (e.target === lightbox) closeLightbox();
         });
+
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox && !lightbox.classList.contains('hidden')) {
-                closeLightbox();
+            if (e.key === 'Escape') {
+                if (!projectModal.classList.contains('hidden')) closeProjectModal();
+                if (!lightbox.classList.contains('hidden')) closeLightbox();
             }
         });
     </script>
